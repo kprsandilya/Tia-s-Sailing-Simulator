@@ -27,6 +27,7 @@ func _physics_process(delta):
 	
 	$Boat.show()
 	
+	#Test
 	if Input.is_action_pressed("ui_right"):
 		get_node("./" + char_name).play("sidewalk")
 		get_node("./" + char_name).flip_h = true
