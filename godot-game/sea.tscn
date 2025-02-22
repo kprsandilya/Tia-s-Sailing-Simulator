@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=20 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
@@ -187,6 +187,22 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oppc2"]
 size = Vector2(5, 13.25)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t022"]
+bg_color = Color(0.448712, 0.448712, 0.448712, 1)
+border_color = Color(0.277528, 0.277528, 0.277528, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tawux"]
+bg_color = Color(0.828126, 0.269119, 0.296754, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8ckc"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
 [node name="Game" type="Node2D"]
 
 [node name="background" type="TileMapLayer" parent="."]
@@ -207,24 +223,34 @@ animation = &"down"
 position = Vector2(-0.5, -0.625)
 shape = SubResource("RectangleShape2D_oppc2")
 
-[node name="Label" type="Label" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(16, 16)
+
+[node name="Node2D" type="Node2D" parent="player"]
+position = Vector2(18, -32)
+
+[node name="ProgressBar" type="ProgressBar" parent="player/Node2D"]
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 5.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3t022")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tawux")
+fill_mode = 1
+show_percentage = false
+script = ExtResource("9_pdhyn")
+
+[node name="Panel" type="Panel" parent="player/Node2D/ProgressBar"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k8ckc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 99.0
 offset_top = -53.0
 offset_right = 140.0
 offset_bottom = -30.0
 text = "temp"
-
-[node name="ProgressBar" type="ProgressBar" parent="player"]
-offset_left = 34.0
-offset_top = -43.0
-offset_right = 74.0
-offset_bottom = -16.0
-scale = Vector2(1.07821, 0.74544)
-value = 100.0
-fill_mode = 1
-script = ExtResource("9_pdhyn")
-
-[node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(12, 12)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
