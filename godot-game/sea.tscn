@@ -219,7 +219,9 @@ fill_mode = 1
 show_percentage = false
 script = ExtResource("9_pdhyn")
 
-[node name="Label" type="Label" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 99.0
 offset_top = -53.0
 offset_right = 140.0
