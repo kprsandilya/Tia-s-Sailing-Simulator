@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=15 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
 [ext_resource type="Texture2D" uid="uid://diigs81jb6iik" path="res://WaterDark.png" id="3_uatv6"]
 [ext_resource type="Texture2D" uid="uid://62nn35suwjhy" path="res://Screenshot 2025-02-22 at 9.33.34 AM.png" id="4_wd14a"]
 [ext_resource type="Texture2D" uid="uid://bdodsn14g6sqe" path="res://BoatPics/sailboat copy 3.png" id="5_kr6ik"]
-[ext_resource type="Script" path="res://player.gd" id="5_mn3w8"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 
@@ -174,6 +173,11 @@ animations = [{
 "name": &"left",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("7_wj0vt")
@@ -183,9 +187,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e41as"]
-radius = 2.0
-height = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oppc2"]
+size = Vector2(5, 13.25)
 
 [node name="Game" type="Node2D"]
 
@@ -195,19 +198,16 @@ tile_set = SubResource("TileSet_2dnno")
 
 [node name="foreground" type="TileMapLayer" parent="."]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(12, 12)
+
 [node name="player" type="CharacterBody2D" parent="."]
-script = ExtResource("5_mn3w8")
 
 [node name="Boat" type="AnimatedSprite2D" parent="player"]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_umgft")
-animation = &"left"
+animation = &"right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-shape = SubResource("CapsuleShape2D_e41as")
-
-[node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(12, 12)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
+position = Vector2(-0.5, -0.625)
+shape = SubResource("RectangleShape2D_oppc2")
