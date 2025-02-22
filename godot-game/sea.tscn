@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://player.gd" id="5_mn3w8"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
+[ext_resource type="Script" path="res://hungerbar.gd" id="8_f338m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s63v5"]
 texture = ExtResource("1_5hcc3")
@@ -211,3 +212,36 @@ zoom = Vector2(12, 12)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
+position = Vector2(-0.5, -0.625)
+shape = SubResource("RectangleShape2D_oppc2")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Hunger" type="ProgressBar" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -283.0
+offset_top = 2.0
+offset_right = -199.0
+offset_bottom = 94.0
+grow_horizontal = 0
+scale = Vector2(3.35122, 1.68126)
+value = 69.0
+script = ExtResource("8_f338m")
+
+[node name="Controls" type="Label" parent="HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -128.0
+offset_right = 108.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "					Controls:
+To Move: Up/Down/Left/Right"
+horizontal_alignment = 1
