@@ -207,23 +207,24 @@ animation = &"down"
 position = Vector2(-0.5, -0.625)
 shape = SubResource("RectangleShape2D_oppc2")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(16, 16)
-
-[node name="ProgressBar" type="ProgressBar" parent="player"]
-offset_left = 18.0
-offset_top = -32.0
-offset_right = 58.0
-offset_bottom = -25.0
-fill_mode = 1
-show_percentage = false
-script = ExtResource("9_pdhyn")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="player"]
 offset_left = 99.0
 offset_top = -53.0
 offset_right = 140.0
 offset_bottom = -30.0
 text = "temp"
+
+[node name="ProgressBar" type="ProgressBar" parent="player"]
+offset_left = 34.0
+offset_top = -43.0
+offset_right = 74.0
+offset_bottom = -16.0
+scale = Vector2(1.07821, 0.74544)
+value = 100.0
+fill_mode = 1
+script = ExtResource("9_pdhyn")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(12, 12)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
