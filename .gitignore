@@ -1,0 +1,16 @@
+# Ignore virtual environment
+venv/
+
+# Ignore __pycache__ directories (Python bytecode)
+__pycache__/
+
+# Ignore Godot specific files/folders
+.godot/
+
+# Ignore system-specific files
+*.DS_Store       # macOS
+Thumbs.db        # Windows
+
+# Ignore IDE/editor config files (add as needed)
+.vscode/
+.idea/
