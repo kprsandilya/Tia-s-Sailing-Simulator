@@ -210,7 +210,9 @@ shape = SubResource("RectangleShape2D_oppc2")
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(12, 12)
 
-[node name="ProgressBar" type="ProgressBar" parent="player"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 34.0
 offset_top = -43.0
 offset_right = 74.0
@@ -218,8 +220,6 @@ offset_bottom = -36.0
 fill_mode = 1
 show_percentage = false
 script = ExtResource("9_pdhyn")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 99.0
