@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=15 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
 [ext_resource type="Texture2D" uid="uid://diigs81jb6iik" path="res://WaterDark.png" id="3_uatv6"]
 [ext_resource type="Texture2D" uid="uid://62nn35suwjhy" path="res://Screenshot 2025-02-22 at 9.33.34 AM.png" id="4_wd14a"]
+[ext_resource type="Texture2D" uid="uid://bdodsn14g6sqe" path="res://BoatPics/sailboat copy 3.png" id="5_kr6ik"]
+[ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
+[ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s63v5"]
 texture = ExtResource("1_5hcc3")
@@ -152,6 +155,41 @@ sources/5 = SubResource("TileSetAtlasSource_4ob70")
 sources/6 = SubResource("TileSetAtlasSource_yhbvf")
 sources/8 = SubResource("TileSetAtlasSource_0ufld")
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_umgft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_kr6ik")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_qxvna")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wj0vt")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oppc2"]
+size = Vector2(5, 13.25)
+
 [node name="Game" type="Node2D"]
 
 [node name="background" type="TileMapLayer" parent="."]
@@ -163,4 +201,13 @@ tile_set = SubResource("TileSet_2dnno")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(12, 12)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="player" type="CharacterBody2D" parent="."]
+
+[node name="Boat" type="AnimatedSprite2D" parent="player"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_umgft")
+animation = &"right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-0.5, -0.625)
+shape = SubResource("RectangleShape2D_oppc2")
