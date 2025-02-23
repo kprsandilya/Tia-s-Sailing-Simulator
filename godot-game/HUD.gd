@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 
 var day = 0
 var char_name = "Tia"
@@ -6,26 +6,58 @@ var nameId = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Timer.start()
+	#$Timer.start()
+	hide_fishing_tooltip()
+<<<<<<< Updated upstream
+	hide_fishing_bar()
+=======
+>>>>>>> Stashed changes
 
 func update_score(score):
-	$Time.text = str(score)
+	#$Time.text = str(score)
+	pass
+
+<<<<<<< Updated upstream
+#Fishing tooltip
+=======
+>>>>>>> Stashed changes
+func hide_fishing_tooltip() -> void:
+	get_node("./fishing_label").hide()
+
+func show_fishing_tooltip() -> void:
+	get_node("./fishing_label").show()
+
+<<<<<<< Updated upstream
+#Fishing progress bar
+func hide_fishing_bar() -> void:
+	get_node("./fishing_bar").hide()
+
+func show_fishing_bar() -> void:
+	get_node("./fishing_bar").show()
+
+=======
+>>>>>>> Stashed changes
+func fish() ->void:
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	update_score("Day: " + str(day) + " Time: " + str(snapped($Timer.get_time_left(), 0.001)))
-	_input(delta)
+	#update_score("Day: " + str(day) + " Time: " + str(snapped($Timer.get_time_left(), 0.001)))
+	#_input(delta)
+	pass
 
 func _on_timer_timeout():
-	day += 1
+	#day += 1
+	pass
 
 func _input(event):
-	if day >= 100:
-		$Finish.show()
-		if Input.is_action_pressed("ui_cancel"):
-			get_tree().quit()
-	else:
-		$Finish.hide()
+	#if day >= 100:
+		#$Finish.show()
+		#if Input.is_action_pressed("ui_cancel"):
+			#get_tree().quit()
+	#else:
+		#$Finish.hide()
+	pass
 
 func get_char_name():
 	return char_name
@@ -37,4 +69,4 @@ func _on_name_2_pressed():
 	else:
 		char_name = "Tia"
 		nameId = 0
-	get_tree().call_group("HUD", "set_new_name", char_name)
+	#get_tree().call_group("HUD", "set_new_name", char_name)
