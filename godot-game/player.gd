@@ -5,8 +5,23 @@ const JUMP_VELOCITY = -400.0
 
 var char_name = "Boat"
 
-func _physics_process(delta: float) -> void:
+#func _process(delta):
+	#print("Player Position: ", position)
+
+func _physics_process(delta: float) -> void:		
 	var input_vector = Vector2.ZERO
+	
+	#Wrap around world
+	if position.y < -83.33335:
+		position.y = 76.66666
+	if position.y > 76.66667:
+		position.y = -83.33335
+		
+	if position.x < -131.6668:
+		position.x = 124.1668
+	if position.x > 124.1669:
+		position.x = -131.6668
+	
 	
 	if Input.is_action_pressed("ui_up"):
 		get_node("./" + char_name).play("up")
@@ -23,6 +38,6 @@ func _physics_process(delta: float) -> void:
 		get_node("./" + char_name).flip_h = true
 		input_vector.x += 1
 	
-	velocity = input_vector * SPEED	
+	velocity = input_vector * SPEED
 
 	move_and_slide()
