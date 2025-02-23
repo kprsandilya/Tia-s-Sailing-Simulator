@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 20.0
+const SPEED = 50.0
 const JUMP_VELOCITY = -400.0
 
 var char_name = "Boat"
@@ -16,13 +16,12 @@ func _physics_process(delta: float) -> void:
 		position.y = 76.66666
 	if position.y > 76.66667:
 		position.y = -83.33335
-		
 	if position.x < -131.6668:
 		position.x = 124.1668
 	if position.x > 124.1669:
 		position.x = -131.6668
 	
-	
+	#Player movement
 	if Input.is_action_pressed("ui_up"):
 		get_node("./" + char_name).play("up")
 		input_vector.y -= 1
@@ -41,3 +40,9 @@ func _physics_process(delta: float) -> void:
 	velocity = input_vector * SPEED
 
 	move_and_slide()
+
+#Detect fishing spots
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "fishing_spot":
+		print("You can fish here") 
+	#pass # Replace with function body.

@@ -2,22 +2,11 @@ extends Node2D
 
 # extends Node
 
-var DIR = OS.get_executable_path().get_base_dir()
-var interpreter_path = ProjectSettings.globalize_path("res://venv/bin/python3.13")
-var script_path = ProjectSettings.globalize_path("res://PythonFiles/cartesia_test.py")
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if !OS.has_feature("standalone"):
-		interpreter_path = ProjectSettings.globalize_path("res://venv/bin/python3.13")
-		script_path = ProjectSettings.globalize_path("res://PythonFiles/cartesia_test.py")
-	voice()
 	pass # Replace with function body.
 
-func voice():
-	var err = OS.execute(interpreter_path, script_path)
-	print(err)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
