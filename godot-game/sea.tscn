@@ -292,12 +292,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k8ckc")
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(16, 16)
 
-[node name="Inventory" type="Button" parent="player"]
-offset_right = 8.0
-offset_bottom = 8.0
-
 [node name="InventoryMenu" type="CanvasLayer" parent="player"]
 script = ExtResource("10_b42oo")
+
+[node name="Inventory" type="Button" parent="player"]
+offset_left = -59.0
+offset_top = -4.0
+offset_right = 24.0
+offset_bottom = 27.0
+scale = Vector2(0.182893, 0.241866)
+text = "Inventory
+"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
