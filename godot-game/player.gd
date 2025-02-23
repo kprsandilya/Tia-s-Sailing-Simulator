@@ -50,4 +50,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		print("You can fish here")
 		get_node("/root/Game/fishing_spot/").show_tooltip()
 		
-	#pass # Replace with function body.
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.name == "fishing_spot_area":
+		print("Exited fishing spot")
+		get_node("/root/Game/fishing_spot/").hide_tooltip()
