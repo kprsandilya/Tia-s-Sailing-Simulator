@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=23 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 [ext_resource type="Script" path="res://hungerbar.gd" id="9_pdhyn"]
+[ext_resource type="Script" path="res://InventoryMenu.gd" id="10_b42oo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s63v5"]
 texture = ExtResource("1_5hcc3")
@@ -290,6 +291,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k8ckc")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(16, 16)
+
+[node name="Inventory" type="Button" parent="player"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="InventoryMenu" type="CanvasLayer" parent="player"]
+script = ExtResource("10_b42oo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
