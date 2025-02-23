@@ -24,7 +24,7 @@ headers = {
 }
 
 payload = {
-	"input" : "fw skibidi?",
+	"input" : "Who am I?",
 	"api_key": API_KEY  # Send the API key in the body
 }
 

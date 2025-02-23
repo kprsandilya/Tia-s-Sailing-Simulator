@@ -382,6 +382,12 @@ position = Vector2(0, -1)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("7_qp11a")
 
+[node name="Button" type="Button" parent="player"]
+offset_left = -55.0
+offset_top = 21.0
+offset_right = -47.0
+offset_bottom = 29.0
+
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(16, 16)
 
@@ -534,6 +540,10 @@ theme_override_font_sizes/font_size = 135
 text = "0
 "
 
+[node name="HTTPRequest" type="HTTPRequest" parent="player"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="player"]
+
 [node name="SpeechBubble" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(6, 23)
@@ -542,6 +552,7 @@ texture = ExtResource("18_na1ca")
 
 [connection signal="area_entered" from="player/Boat/Area2D" to="player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="player/Boat/Area2D" to="player" method="_on_area_2d_area_exited"]
+[connection signal="pressed" from="player/Button" to="player" method="_on_button_pressed"]
 [connection signal="pressed" from="player/inventory_button" to="player/inventory_menu" method="show_inventory"]
 [connection signal="pressed" from="player/inventory_menu/hide_button" to="player/inventory_menu" method="hide_inventory"]
 [connection signal="pressed" from="player/inventory_menu/fish_tbutton/feat_button" to="player/inventory_menu" method="eatFish"]
