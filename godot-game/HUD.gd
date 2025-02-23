@@ -7,10 +7,23 @@ var nameId = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#$Timer.start()
+	start_score()
 	get_node("./game_over").hide()
 	get_node("./fish_notification").hide()
 	hide_fishing_tooltip()
 	hide_fishing_bar()
+
+func start_score():
+	var timer = Timer.new()
+	timer.wait_time = 20.0
+	timer.autostart = true
+	timer.one_shot = false
+	timer.timeout.connect(_on_timer_timeout)
+	add_child(timer)
+
+func _on_timer_timeout():
+	day += 1
+	get_node("./score").text = "DAY: %s" % day
 
 func update_score(score):
 	#$Time.text = str(score)
