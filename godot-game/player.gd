@@ -2,10 +2,11 @@ extends CharacterBody2D
 
 @onready var progress_bar = get_node("./Hud/fishing_bar")
 
+var current_fishing_spot = null
 var can_interact := false
 var is_holding := false
 var progress_time := 0.0
-const SPEED = 50.0
+var SPEED = 50.0
 const HOLD_TIME = 3.0
 
 var char_name = "./Boat"
@@ -16,6 +17,7 @@ func _ready():
 func _process(delta):
 	#print("Player Position: ", position)
 	if can_interact and Input.is_action_pressed("ui_interact"):
+		SPEED = 0
 		get_node("./Hud").hide_fishing_tooltip()
 		if not is_holding:
 			is_holding = true
@@ -24,11 +26,11 @@ func _process(delta):
 
 		progress_time += delta
 		progress_bar.value = (progress_time / HOLD_TIME) * 100
-		print("Progress value: ", progress_bar.value)
 
 		if progress_time >= HOLD_TIME:
 			complete_action()
 	else:
+		SPEED = 50
 		if is_holding:
 			reset_progress_bar()
 
@@ -67,8 +69,11 @@ func _physics_process(delta: float) -> void:
 
 #
 func complete_action():
-	print("Action completed!")  # Replace with actual functionality
+	print("Action completed!")
 	reset_progress_bar()
+	if current_fishing_spot:
+		current_fishing_spot.queue_free()
+		current_fishing_spot = null
 
 func reset_progress_bar():
 	progress_time = 0.0
@@ -80,15 +85,17 @@ func reset_progress_bar():
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "fishing_spot_area":
 		print("You can fish here")
+		current_fishing_spot = area.get_parent()
 		can_interact = true
 		get_node("./Hud").show_fishing_tooltip()
 		#get_node("/root/Game/fishing_spot/").show_tooltip()
-
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.name == "fishing_spot_area":
 		print("Exited fishing spot")
 		can_interact = false
+		current_fishing_spot = null
 		reset_progress_bar()
+		get_node("./Hud").hide_fishing_bar()
 		get_node("./Hud").hide_fishing_tooltip()
 		#get_node("/root/Game/fishing_spot/").hide_tooltip()

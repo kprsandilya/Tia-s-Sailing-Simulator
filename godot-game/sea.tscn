@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=26 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Script" path="res://world.gd" id="1_kek45"]
@@ -197,7 +197,7 @@ bg_color = Color(0.448712, 0.448712, 0.448712, 1)
 border_color = Color(0.277528, 0.277528, 0.277528, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tawux"]
-bg_color = Color(0.828126, 0.269119, 0.296754, 1)
+bg_color = Color(0.757399, 0.349895, 0.332158, 1)
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8ckc"]
@@ -207,6 +207,9 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62xr1"]
+bg_color = Color(0.349357, 0.677958, 0.51749, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kek45")
@@ -270,8 +273,7 @@ offset_top = 39.0
 offset_right = -10.0
 offset_bottom = 41.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3t022")
-theme_override_styles/fill = SubResource("StyleBoxFlat_tawux")
-fill_mode = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_62xr1")
 show_percentage = false
 script = ExtResource("9_pdhyn")
 
