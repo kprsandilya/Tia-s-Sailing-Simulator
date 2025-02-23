@@ -14,3 +14,5 @@ Thumbs.db        # Windows
 # Ignore IDE/editor config files (add as needed)
 .vscode/
 .idea/
+
+.env
