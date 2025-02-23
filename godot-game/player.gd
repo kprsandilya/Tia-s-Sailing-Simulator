@@ -9,10 +9,22 @@ var progress_time := 0.0
 var SPEED = 50.0
 const HOLD_TIME = 3.0
 
+#Game state
+var hunger_state = 0
+var fish_count = 0
+var clownfish_count = 0
+var shark_count = 0
+var collected_fish = 0      #false
+var collected_clownfish = 0 #false
+var collected_shark = 0     #false
+
 var char_name = "./Boat"
 
 func _ready():
 	pass
+
+func get_game_state() -> Array:
+	return [hunger_state, fish_count, clownfish_count, shark_count, collected_clownfish, collected_clownfish, collected_shark]
 
 func _process(delta):
 	#print("Player Position: ", position)
@@ -97,13 +109,29 @@ func complete_fish():
 	var fish_num = randi_range(1, 3)
 	#update inventory
 	var inventory_node = get_node("./inventory_menu")
+	var fish_notification_label = get_node("./Hud/fish_notification")
+	var notificatoin_string = ""
 	match fish_num:
 		1:
+			notificatoin_string = "YOU CAUGHT A FISH!"
+			collected_fish = 1
+			fish_count += 1
 			inventory_node.catchFish()
 		2:
+			notificatoin_string = "YOU CAUGHT A CLOWNFISH!"
+			collected_clownfish = 1
+			clownfish_count += 1
 			inventory_node.catchClownFish()
 		3:
+			notificatoin_string = "YOU CAUGHT A SHARK!"
+			collected_shark = 1
+			clownfish_count += 1 
 			inventory_node.catchShark()
+	
+	fish_notification_label.show()
+	fish_notification_label.text = notificatoin_string
+	await get_tree().create_timer(2.0).timeout
+	fish_notification_label.hide()
 	
 func reset_progress_bar():
 	progress_time = 0.0

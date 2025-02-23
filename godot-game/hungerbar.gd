@@ -8,6 +8,9 @@ func _ready() -> void:
 	value = 100
 	start_health_decrease()
 
+func get_hunger_state():
+	return value
+
 func start_health_decrease():
 	var timer = Timer.new()
 	timer.wait_time = interval

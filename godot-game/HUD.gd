@@ -8,6 +8,7 @@ var nameId = 0;
 func _ready():
 	#$Timer.start()
 	get_node("./game_over").hide()
+	get_node("./fish_notification").hide()
 	hide_fishing_tooltip()
 	hide_fishing_bar()
 
