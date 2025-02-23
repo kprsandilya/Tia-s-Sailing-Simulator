@@ -8,13 +8,8 @@
 [ext_resource type="Script" path="res://player.gd" id="5_cco24"]
 [ext_resource type="Texture2D" uid="uid://bdodsn14g6sqe" path="res://BoatPics/sailboat copy 3.png" id="5_kr6ik"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://dlehbhyv15bng" path="res://fishing_spot.tscn" id="6_v81mg"]
 [ext_resource type="FontFile" uid="uid://dttt2hsppo8qu" path="res://CONCHARS.png" id="7_nrxtk"]
-=======
-[ext_resource type="PackedScene" path="res://fishing_spot.tscn" id="6_v81mg"]
-[ext_resource type="FontFile" path="res://CONCHARS.png" id="7_nrxtk"]
->>>>>>> Stashed changes
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 [ext_resource type="Script" path="res://hungerbar.gd" id="9_pdhyn"]
 [ext_resource type="Script" path="res://HUD.gd" id="11_h3n6a"]
@@ -223,10 +218,6 @@ tile_set = SubResource("TileSet_2dnno")
 [node name="foreground" type="TileMapLayer" parent="."]
 
 [node name="fishing_spot" parent="." instance=ExtResource("6_v81mg")]
-<<<<<<< Updated upstream
-=======
-visible = false
->>>>>>> Stashed changes
 
 [node name="player" type="CharacterBody2D" parent="."]
 z_index = 1
@@ -273,11 +264,7 @@ theme_override_fonts/font = ExtResource("7_nrxtk")
 theme_override_font_sizes/font_size = 2
 text = "Press [e] to Fish"
 
-<<<<<<< Updated upstream
 [node name="fishing_bar" type="ProgressBar" parent="player/Hud"]
-=======
-[node name="fish_bar" type="ProgressBar" parent="player/Hud"]
->>>>>>> Stashed changes
 offset_left = -27.0
 offset_top = 39.0
 offset_right = -10.0
@@ -288,11 +275,7 @@ fill_mode = 1
 show_percentage = false
 script = ExtResource("9_pdhyn")
 
-<<<<<<< Updated upstream
 [node name="Panel" type="Panel" parent="player/Hud/fishing_bar"]
-=======
-[node name="Panel" type="Panel" parent="player/Hud/fish_bar"]
->>>>>>> Stashed changes
 layout_mode = 0
 offset_right = 18.0
 offset_bottom = 3.0

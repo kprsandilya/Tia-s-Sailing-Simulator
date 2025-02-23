@@ -1,20 +1,12 @@
 extends CharacterBody2D
 
-<<<<<<< Updated upstream
 @onready var progress_bar = get_node("./Hud/fishing_bar")
-=======
-@onready var progress_bar = get_node("./Hud/fish_bar")  # Reference ProgressBar node
->>>>>>> Stashed changes
 
 var can_interact := false
 var is_holding := false
 var progress_time := 0.0
 const SPEED = 50.0
-<<<<<<< Updated upstream
 const HOLD_TIME = 3.0
-=======
-const HOLD_TIME = 5.0
->>>>>>> Stashed changes
 
 var char_name = "./Boat"
 
@@ -22,27 +14,9 @@ func _ready():
 	pass
 
 func _process(delta):
-<<<<<<< Updated upstream
-=======
-	if can_interact and Input.is_action_pressed("ui_interact"):
-		if not is_holding:
-			is_holding = true
-			progress_bar.visible = true
-			progress_bar.value = 0
-
-			progress_time += delta
-			progress_bar.value = (progress_time / HOLD_TIME) * 100
-
-			if progress_time >= HOLD_TIME:
-				complete_action()
-			else:
-				if is_holding:
-					reset_progress_bar()
->>>>>>> Stashed changes
 	#print("Player Position: ", position)
 	if can_interact and Input.is_action_pressed("ui_interact"):
 		get_node("./Hud").hide_fishing_tooltip()
-		#get_node("./Hud").show_fishing_bar()
 		if not is_holding:
 			is_holding = true
 			progress_bar.visible = true
@@ -98,12 +72,9 @@ func complete_action():
 
 func reset_progress_bar():
 	progress_time = 0.0
+	progress_bar.value = 0.0
 	is_holding = false
-<<<<<<< Updated upstream
 	#progress_bar.visible = false
-=======
-	progress_bar.visible = false
->>>>>>> Stashed changes
 
 #Detect fishing spots
 func _on_area_2d_area_entered(area: Area2D) -> void:

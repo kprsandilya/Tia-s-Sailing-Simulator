@@ -8,26 +8,19 @@ var nameId = 0;
 func _ready():
 	#$Timer.start()
 	hide_fishing_tooltip()
-<<<<<<< Updated upstream
 	hide_fishing_bar()
-=======
->>>>>>> Stashed changes
 
 func update_score(score):
 	#$Time.text = str(score)
 	pass
 
-<<<<<<< Updated upstream
 #Fishing tooltip
-=======
->>>>>>> Stashed changes
 func hide_fishing_tooltip() -> void:
 	get_node("./fishing_label").hide()
 
 func show_fishing_tooltip() -> void:
 	get_node("./fishing_label").show()
 
-<<<<<<< Updated upstream
 #Fishing progress bar
 func hide_fishing_bar() -> void:
 	get_node("./fishing_bar").hide()
@@ -35,8 +28,6 @@ func hide_fishing_bar() -> void:
 func show_fishing_bar() -> void:
 	get_node("./fishing_bar").show()
 
-=======
->>>>>>> Stashed changes
 func fish() ->void:
 	pass
 
