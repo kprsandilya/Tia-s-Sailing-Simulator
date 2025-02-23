@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=22 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
@@ -6,10 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://62nn35suwjhy" path="res://Screenshot 2025-02-22 at 9.33.34 AM.png" id="4_wd14a"]
 [ext_resource type="Script" path="res://player.gd" id="5_cco24"]
 [ext_resource type="Texture2D" uid="uid://bdodsn14g6sqe" path="res://BoatPics/sailboat copy 3.png" id="5_kr6ik"]
-[ext_resource type="Texture2D" path="res://WaterDark2.png" id="5_ph4ss"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
-[ext_resource type="Texture2D" path="res://WaterDark3.png" id="6_yvpoy"]
-[ext_resource type="FontFile" path="res://CONCHARS.png" id="7_nrxtk"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 [ext_resource type="Script" path="res://hungerbar.gd" id="9_pdhyn"]
 
@@ -167,10 +164,10 @@ animations = [{
 "texture": ExtResource("3_uatv6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_yvpoy")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_ph4ss")
+"texture": null
 }],
 "loop": true,
 "name": &"default",
@@ -254,7 +251,6 @@ offset_left = -0.5
 offset_top = 9.625
 offset_right = 34.5
 offset_bottom = 11.625
-theme_override_fonts/font = ExtResource("7_nrxtk")
 theme_override_font_sizes/font_size = 2
 text = "Press [e] to Fish"
 
