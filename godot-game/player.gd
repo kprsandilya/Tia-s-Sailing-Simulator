@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var progress_bar = get_node("./Hud/fishing_bar")
+@onready var fishing_bar = get_node("./Hud/fishing_bar")
 
 var current_fishing_spot = null
 var can_interact := false
@@ -16,19 +16,21 @@ func _ready():
 
 func _process(delta):
 	#print("Player Position: ", position)
+
+	#Fishing
 	if can_interact and Input.is_action_pressed("ui_interact"):
 		SPEED = 0
 		get_node("./Hud").hide_fishing_tooltip()
 		if not is_holding:
 			is_holding = true
-			progress_bar.visible = true
-			progress_bar.value = 0
+			fishing_bar.visible = true
+			fishing_bar.value = 0
 
 		progress_time += delta
-		progress_bar.value = (progress_time / HOLD_TIME) * 100
+		fishing_bar.value = (progress_time / HOLD_TIME) * 100
 
 		if progress_time >= HOLD_TIME:
-			complete_action()
+			complete_fish()
 	else:
 		SPEED = 50
 		if is_holding:
@@ -48,6 +50,7 @@ func _physics_process(delta: float) -> void:
 		position.x = -131.6668
 	
 	#Player movement
+	#	Cardinal
 	if Input.is_action_pressed("ui_up"):
 		get_node("./" + char_name).play("up")
 		input_vector.y -= 1
@@ -62,24 +65,51 @@ func _physics_process(delta: float) -> void:
 		get_node("./" + char_name).play("left")
 		get_node("./" + char_name).flip_h = true
 		input_vector.x += 1
+	#	Diagonals
+	if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_up"):
+		get_node("./" + char_name).play("nw")
+		get_node("./" + char_name).flip_h = false
+	if Input.is_action_pressed("ui_right") and Input.is_action_pressed("ui_up"):
+		get_node("./" + char_name).play("nw")
+		get_node("./" + char_name).flip_h = true
+	if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down"):
+		get_node("./" + char_name).play("sw")
+		get_node("./" + char_name).flip_h = false
+	if Input.is_action_pressed("ui_right") and Input.is_action_pressed("ui_down"):
+		get_node("./" + char_name).play("sw")
+		get_node("./" + char_name).flip_h = true
 	
 	velocity = input_vector * SPEED
 
 	move_and_slide()
 
 #
-func complete_action():
-	print("Action completed!")
+func complete_fish():
+	print("Fishing completed!")
+	#Visuals
 	reset_progress_bar()
 	if current_fishing_spot:
 		current_fishing_spot.queue_free()
 		current_fishing_spot = null
-
+		#Spawn new fish
+		get_node("/root/Game").spawn_fish()
+	#Pick fish
+	var fish_num = randi_range(1, 3)
+	#update inventory
+	var inventory_node = get_node("./inventory_menu")
+	match fish_num:
+		1:
+			inventory_node.catchFish()
+		2:
+			inventory_node.catchClownFish()
+		3:
+			inventory_node.catchShark()
+	
 func reset_progress_bar():
 	progress_time = 0.0
-	progress_bar.value = 0.0
+	fishing_bar.value = 0.0
 	is_holding = false
-	#progress_bar.visible = false
+	#fishing_bar.visible = false
 
 #Detect fishing spots
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -95,7 +125,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		print("Exited fishing spot")
 		can_interact = false
 		current_fishing_spot = null
-		reset_progress_bar()
+		#reset_progress_bar()
 		get_node("./Hud").hide_fishing_bar()
 		get_node("./Hud").hide_fishing_tooltip()
 		#get_node("/root/Game/fishing_spot/").hide_tooltip()

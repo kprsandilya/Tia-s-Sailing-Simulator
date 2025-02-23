@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=37 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Script" path="res://world.gd" id="1_kek45"]
@@ -7,13 +7,20 @@
 [ext_resource type="Texture2D" uid="uid://62nn35suwjhy" path="res://Screenshot 2025-02-22 at 9.33.34 AM.png" id="4_wd14a"]
 [ext_resource type="Script" path="res://player.gd" id="5_cco24"]
 [ext_resource type="Texture2D" uid="uid://bdodsn14g6sqe" path="res://BoatPics/sailboat copy 3.png" id="5_kr6ik"]
+[ext_resource type="Texture2D" uid="uid://ctmpwh1nb5yir" path="res://tia_border.tres" id="6_quilm"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
 [ext_resource type="PackedScene" uid="uid://dlehbhyv15bng" path="res://fishing_spot.tscn" id="6_v81mg"]
 [ext_resource type="FontFile" uid="uid://dttt2hsppo8qu" path="res://CONCHARS.png" id="7_nrxtk"]
+[ext_resource type="Texture2D" uid="uid://dw0bg4mgbj6hi" path="res://tia.tres" id="7_qp11a"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 [ext_resource type="Script" path="res://hungerbar.gd" id="9_pdhyn"]
+[ext_resource type="Texture2D" uid="uid://3phvbm8cpvt5" path="res://sailboat.png" id="10_50doq"]
 [ext_resource type="Script" path="res://HUD.gd" id="11_h3n6a"]
-[ext_resource type="Script" path="res://InventoryMenu.gd" id="12_ge6oe"]
+[ext_resource type="Script" path="res://inventory_menu.gd" id="17_yf60l"]
+[ext_resource type="Texture2D" uid="uid://474hm4claovs" path="res://a.png" id="18_2p37d"]
+[ext_resource type="Texture2D" uid="uid://5f7ojir2tjjn" path="res://SpeechBubble.png" id="18_na1ca"]
+[ext_resource type="Texture2D" uid="uid://bfug2mah5yhc4" path="res://a1.png" id="19_k6l8b"]
+[ext_resource type="Texture2D" uid="uid://de8nvj5cihjsw" path="res://a2.png" id="20_48lt4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s63v5"]
 texture = ExtResource("1_5hcc3")
@@ -162,6 +169,14 @@ sources/5 = SubResource("TileSetAtlasSource_4ob70")
 sources/6 = SubResource("TileSetAtlasSource_yhbvf")
 sources/8 = SubResource("TileSetAtlasSource_0ufld")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qne2h"]
+atlas = ExtResource("10_50doq")
+region = Rect2(192, 64, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aylel"]
+atlas = ExtResource("10_50doq")
+region = Rect2(0, 0, 96, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_umgft"]
 animations = [{
 "frames": [{
@@ -178,6 +193,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qne2h")
+}],
+"loop": true,
+"name": &"nw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aylel")
+}],
+"loop": true,
+"name": &"sw",
 "speed": 5.0
 }, {
 "frames": [{
@@ -211,6 +242,10 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62xr1"]
 bg_color = Color(0.349357, 0.677958, 0.51749, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckmcc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u5py4"]
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kek45")
 
@@ -231,10 +266,11 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_umgft")
 animation = &"down"
 
-[node name="Area2D" type="Area2D" parent="player"]
-position = Vector2(-0.5, -0.625)
+[node name="Area2D" type="Area2D" parent="player/Boat"]
+position = Vector2(-2, -2.5)
+scale = Vector2(4, 4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/Boat/Area2D"]
 shape = SubResource("RectangleShape2D_oppc2")
 
 [node name="Hud" type="Node2D" parent="player"]
@@ -275,7 +311,6 @@ offset_bottom = 41.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3t022")
 theme_override_styles/fill = SubResource("StyleBoxFlat_62xr1")
 show_percentage = false
-script = ExtResource("9_pdhyn")
 
 [node name="Panel" type="Panel" parent="player/Hud/fishing_bar"]
 layout_mode = 0
@@ -283,17 +318,186 @@ offset_right = 18.0
 offset_bottom = 3.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k8ckc")
 
+[node name="game_over" type="Label" parent="player/Hud"]
+offset_left = -72.0
+offset_top = 26.0
+offset_right = 36.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 12
+text = "GAME OVER"
+
+[node name="TiaBorder" type="Sprite2D" parent="player/Hud"]
+position = Vector2(-69, 57)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_quilm")
+
+[node name="Tia" type="Sprite2D" parent="player/Hud/TiaBorder"]
+z_index = 3
+position = Vector2(0, -1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_qp11a")
+
+[node name="Label" type="Label" parent="player/Hud"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(16, 16)
 
-[node name="Inventory" type="Button" parent="player"]
-offset_left = -58.0
-offset_top = -32.0
-offset_right = -50.0
-offset_bottom = -24.0
+[node name="inventory_button" type="Button" parent="player"]
+offset_left = -55.0
+offset_top = 8.0
+offset_right = -47.0
+offset_bottom = 16.0
 
-[node name="InventoryMenu" type="CanvasLayer" parent="player"]
-script = ExtResource("12_ge6oe")
+[node name="inventory_menu" type="Panel" parent="player"]
+visible = false
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 30.0
+offset_bottom = 18.0
+script = ExtResource("17_yf60l")
 
-[connection signal="area_entered" from="player/Area2D" to="player" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="player/Area2D" to="player" method="_on_area_2d_area_exited"]
+[node name="hide_button" type="Button" parent="player/inventory_menu"]
+layout_mode = 0
+offset_left = 54.0
+offset_right = 62.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 4
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ckmcc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u5py4")
+text = "X"
+
+[node name="fish_tbutton" type="TextureButton" parent="player/inventory_menu"]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 360.0
+offset_bottom = 357.0
+scale = Vector2(0.05, 0.05)
+texture_normal = ExtResource("18_2p37d")
+
+[node name="feat_button" type="Button" parent="player/inventory_menu/fish_tbutton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.085
+anchor_top = 0.242
+anchor_right = -0.085
+anchor_bottom = 0.242
+offset_left = 750.6
+offset_top = 37.88
+offset_right = 1058.6
+offset_bottom = 157.88
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 100
+text = "EAT"
+
+[node name="fcount_label" type="Label" parent="player/inventory_menu/fish_tbutton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.082
+anchor_top = 0.251
+anchor_right = -0.082
+anchor_bottom = 0.251
+offset_left = 536.52
+offset_top = 49.64
+offset_right = 636.52
+offset_bottom = 169.64
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="clownfish_tbutton" type="TextureButton" parent="player/inventory_menu"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 630.0
+offset_bottom = 636.0
+scale = Vector2(0.05, 0.05)
+texture_normal = ExtResource("19_k6l8b")
+
+[node name="ceat_button" type="Button" parent="player/inventory_menu/clownfish_tbutton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.263
+anchor_top = 0.171
+anchor_right = 0.263
+anchor_bottom = 0.171
+offset_left = 751.68
+offset_top = 240.56
+offset_right = 1059.68
+offset_bottom = 360.56
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 100
+text = "EAT"
+
+[node name="ccount_label" type="Label" parent="player/inventory_menu/clownfish_tbutton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.263
+anchor_top = 0.172
+anchor_right = 0.263
+anchor_bottom = 0.172
+offset_left = 536.68
+offset_top = 239.92
+offset_right = 636.68
+offset_bottom = 339.92
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="shark_tbutton" type="TextureButton" parent="player/inventory_menu"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 15.0
+offset_right = 514.0
+offset_bottom = 527.0
+scale = Vector2(0.04, 0.04)
+texture_normal = ExtResource("20_48lt4")
+flip_h = true
+
+[node name="seat_button" type="Button" parent="player/inventory_menu/shark_tbutton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.173
+anchor_top = -0.659
+anchor_right = -0.173
+anchor_bottom = -0.659
+offset_left = 938.576
+offset_top = 547.408
+offset_right = 1336.58
+offset_bottom = 697.408
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 130
+text = "EAT"
+
+[node name="scount_label" type="Label" parent="player/inventory_menu/shark_tbutton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.172
+anchor_top = -0.66
+anchor_right = -0.172
+anchor_bottom = -0.66
+offset_left = 663.064
+offset_top = 562.92
+offset_right = 798.064
+offset_bottom = 697.92
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 135
+text = "0
+"
+
+[node name="SpeechBubble" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(6, 23)
+scale = Vector2(0.207078, 0.121429)
+texture = ExtResource("18_na1ca")
+
+[connection signal="area_entered" from="player/Boat/Area2D" to="player" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="player/Boat/Area2D" to="player" method="_on_area_2d_area_exited"]
+[connection signal="pressed" from="player/inventory_button" to="player/inventory_menu" method="show_inventory"]
+[connection signal="pressed" from="player/inventory_menu/hide_button" to="player/inventory_menu" method="hide_inventory"]
+[connection signal="pressed" from="player/inventory_menu/fish_tbutton/feat_button" to="player/inventory_menu" method="eatFish"]
+[connection signal="pressed" from="player/inventory_menu/clownfish_tbutton/ceat_button" to="player/inventory_menu" method="eatClownfish"]
+[connection signal="pressed" from="player/inventory_menu/shark_tbutton/seat_button" to="player/inventory_menu" method="eatShark"]

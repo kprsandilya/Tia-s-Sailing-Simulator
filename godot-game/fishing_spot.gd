@@ -10,10 +10,3 @@ func hide_tooltip() -> void:
 
 func show_tooltip() -> void:
 	get_node("./fishing_spot_area/fishing_label").show()
-
-func fish() ->void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

@@ -7,6 +7,7 @@ var nameId = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#$Timer.start()
+	get_node("./game_over").hide()
 	hide_fishing_tooltip()
 	hide_fishing_bar()
 
@@ -27,6 +28,12 @@ func hide_fishing_bar() -> void:
 
 func show_fishing_bar() -> void:
 	get_node("./fishing_bar").show()
+	
+#Gameover
+func game_over() -> void:
+	get_node("./game_over").show()
+	#await get_tree().create_timer(1.0).timeout
+	get_tree().paused = true
 
 func fish() ->void:
 	pass
@@ -37,9 +44,9 @@ func _process(delta):
 	#_input(delta)
 	pass
 
-func _on_timer_timeout():
+#func _on_timer_timeout():
 	#day += 1
-	pass
+	#pass
 
 func _input(event):
 	#if day >= 100:
