@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=25 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://62nn35suwjhy" path="res://Screenshot 2025-02-22 at 9.33.34 AM.png" id="4_wd14a"]
 [ext_resource type="Script" path="res://player.gd" id="5_cco24"]
 [ext_resource type="Texture2D" uid="uid://bdodsn14g6sqe" path="res://BoatPics/sailboat copy 3.png" id="5_kr6ik"]
+[ext_resource type="Texture2D" uid="uid://bjcne1gtt2mef" path="res://WaterDark2.png" id="5_ph4ss"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
+[ext_resource type="Texture2D" uid="uid://bm0thcin2oju" path="res://WaterDark3.png" id="6_yvpoy"]
+[ext_resource type="FontFile" uid="uid://dttt2hsppo8qu" path="res://CONCHARS.png" id="7_nrxtk"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 [ext_resource type="Script" path="res://hungerbar.gd" id="9_pdhyn"]
 
@@ -157,6 +160,26 @@ sources/5 = SubResource("TileSetAtlasSource_4ob70")
 sources/6 = SubResource("TileSetAtlasSource_yhbvf")
 sources/8 = SubResource("TileSetAtlasSource_0ufld")
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_35rsh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uatv6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yvpoy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ph4ss")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk0bm"]
+size = Vector2(15, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_umgft"]
 animations = [{
 "frames": [{
@@ -211,6 +234,30 @@ tile_set = SubResource("TileSet_2dnno")
 
 [node name="foreground" type="TileMapLayer" parent="."]
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 0)
+sprite_frames = SubResource("SpriteFrames_35rsh")
+autoplay = "default"
+frame_progress = 0.442816
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+
+[node name="fishing_spot" type="Area2D" parent="AnimatedSprite2D"]
+position = Vector2(-16.5, -0.625)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/fishing_spot"]
+position = Vector2(17, 0.625)
+shape = SubResource("RectangleShape2D_gk0bm")
+
+[node name="Label" type="Label" parent="AnimatedSprite2D/fishing_spot"]
+offset_left = -0.5
+offset_top = 9.625
+offset_right = 34.5
+offset_bottom = 11.625
+theme_override_fonts/font = ExtResource("7_nrxtk")
+theme_override_font_sizes/font_size = 2
+text = "Press [e] to Fish"
+
 [node name="player" type="CharacterBody2D" parent="."]
 script = ExtResource("5_cco24")
 
@@ -219,17 +266,16 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_umgft")
 animation = &"down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+[node name="Area2D" type="Area2D" parent="player"]
 position = Vector2(-0.5, -0.625)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/Area2D"]
 shape = SubResource("RectangleShape2D_oppc2")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(16, 16)
-
-[node name="Node2D" type="Node2D" parent="player"]
+[node name="Hud" type="Node2D" parent="player"]
 position = Vector2(18, -32)
 
-[node name="ProgressBar" type="ProgressBar" parent="player/Node2D"]
+[node name="ProgressBar" type="ProgressBar" parent="player/Hud"]
 offset_left = 8.0
 offset_top = 1.0
 offset_right = 40.0
@@ -240,17 +286,25 @@ fill_mode = 1
 show_percentage = false
 script = ExtResource("9_pdhyn")
 
-[node name="Panel" type="Panel" parent="player/Node2D/ProgressBar"]
+[node name="Panel" type="Panel" parent="player/Hud/ProgressBar"]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 4.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_k8ckc")
 
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(16, 16)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
 offset_left = 99.0
 offset_top = -53.0
 offset_right = 140.0
 offset_bottom = -30.0
 text = "temp"
+
+[connection signal="area_entered" from="AnimatedSprite2D/fishing_spot" to="player" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="player/Area2D" to="player" method="_on_area_2d_area_entered"]
