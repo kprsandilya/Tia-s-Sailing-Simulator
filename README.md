@@ -19,5 +19,8 @@ We designed a sailing game in Godot using GDScript, then
 ## Credits
 
 Assets from:
+- https://ninjikin.itch.io/water
+- https://koreanois.itch.io/boat-and-ship-sprites
+- https://josie-makes-stuff.itch.io/pixel-art-farming-assets
 
 
