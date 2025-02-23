@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://d1k8d54hbhsn7"]
+[gd_scene load_steps=26 format=4 uid="uid://d1k8d54hbhsn7"]
 
 [ext_resource type="Texture2D" uid="uid://ba4sdvhnfcd62" path="res://WaterTiles.png" id="1_5hcc3"]
 [ext_resource type="Texture2D" uid="uid://di0lqg1fm0n61" path="res://sailship.png" id="2_k7ahb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bjcne1gtt2mef" path="res://WaterDark2.png" id="5_ph4ss"]
 [ext_resource type="Texture2D" uid="uid://cog7wfvvarwof" path="res://BoatPics/sailboat copy 8.png" id="6_qxvna"]
 [ext_resource type="Texture2D" uid="uid://bm0thcin2oju" path="res://WaterDark3.png" id="6_yvpoy"]
+[ext_resource type="Script" path="res://fishing_spot.gd" id="7_csk6t"]
 [ext_resource type="FontFile" uid="uid://dttt2hsppo8qu" path="res://CONCHARS.png" id="7_nrxtk"]
 [ext_resource type="Texture2D" uid="uid://lngl3s10gu40" path="res://BoatPics/sailboat copy 4.png" id="7_wj0vt"]
 [ext_resource type="Script" path="res://hungerbar.gd" id="9_pdhyn"]
@@ -234,22 +235,23 @@ tile_set = SubResource("TileSet_2dnno")
 
 [node name="foreground" type="TileMapLayer" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="fishing_spot" type="AnimatedSprite2D" parent="."]
 position = Vector2(16, 0)
 sprite_frames = SubResource("SpriteFrames_35rsh")
 autoplay = "default"
 frame_progress = 0.442816
+script = ExtResource("7_csk6t")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fishing_spot"]
 
-[node name="fishing_spot" type="Area2D" parent="AnimatedSprite2D"]
+[node name="fishing_spot_area" type="Area2D" parent="fishing_spot"]
 position = Vector2(-16.5, -0.625)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/fishing_spot"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fishing_spot/fishing_spot_area"]
 position = Vector2(17, 0.625)
 shape = SubResource("RectangleShape2D_gk0bm")
 
-[node name="Label" type="Label" parent="AnimatedSprite2D/fishing_spot"]
+[node name="fishing_label" type="Label" parent="fishing_spot/fishing_spot_area"]
 offset_left = -0.5
 offset_top = 9.625
 offset_right = 34.5
@@ -295,16 +297,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k8ckc")
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(16, 16)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-visible = false
-offset_left = 99.0
-offset_top = -53.0
-offset_right = 140.0
-offset_bottom = -30.0
-text = "temp"
-
-[connection signal="area_entered" from="AnimatedSprite2D/fishing_spot" to="player" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="fishing_spot/fishing_spot_area" to="player" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="player/Area2D" to="player" method="_on_area_2d_area_entered"]

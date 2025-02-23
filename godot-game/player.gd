@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
 const SPEED = 50.0
-const JUMP_VELOCITY = -400.0
 
-var char_name = "Boat"
+var char_name = "./Boat"
+@onready var fishing_prompt = get_node("./AnimatedSprite2D/fishing_spot/fishing_label")
+
+func _ready():
+	pass
 
 #func _process(delta):
 	#print("Player Position: ", position)
@@ -43,6 +46,8 @@ func _physics_process(delta: float) -> void:
 
 #Detect fishing spots
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.name == "fishing_spot":
-		print("You can fish here") 
+	if area.name == "fishing_spot_area":
+		print("You can fish here")
+		get_node("/root/Game/fishing_spot/").show_tooltip()
+		
 	#pass # Replace with function body.
