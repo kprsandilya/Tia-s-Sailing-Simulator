@@ -1,10 +1,6 @@
 # BoilerMakeXII Project - Tias's Sailing Simulation
 
-## Group Members
-
-Sandi Kambhampati, Shivam Patel, Sharan Suthaharan, Manith Kamalakanth
-
-# BoilerMakeXII Project - Tias's Sailing Simulation
+https://www.youtube.com/watch?v=4KYQdsFEecg&t=48s
 
 ## Group Members
 
